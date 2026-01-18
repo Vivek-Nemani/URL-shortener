@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Short URL{% endblock %}
+
+{% block content %}
+    <h1>{{ full_short_url }}</h1>
+    <a href="{{ url_for('home') }}">BACK TO HOME</a>
+{% endblock %}
