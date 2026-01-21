@@ -10,4 +10,4 @@ venv
 *.pyc
 .DS_Store
 .idea/*
-StepsTaken.txt
+Steps_Taken.txt
