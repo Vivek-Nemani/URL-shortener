@@ -1,15 +1,40 @@
 {% extends "base.html" %}
-{% block title %}shorten URL{% endblock %}
+{% block title %}Shorten URL{% endblock %}
 
 {% block content %}
-<form action="#", method="post">
-    <label for="url">Enter URL to shorten:</label>
-
-    <input type="url" name="nm" id="url"
-       placeholder="https://example.com"
-       pattern="https://.*" size="50"
-       required>
-    <br>
-    <input type="submit" value="submit" class="btn btn-primary">
+<h3>Shorten a URL</h3>
+<form action="{{ url_for('home') }}" method="post" class="mb-4">
+    <div class="form-group">
+        <label for="url">Enter URL to shorten:</label>
+        <input type="url" name="nm" id="url" class="form-control"
+           placeholder="https://example.com"
+           pattern="https://.*" size="50"
+           required>
+    </div>
+    <input type="submit" value="Shorten" class="btn btn-primary">
 </form>
+
+<h4>Your recent URLs</h4>
+{% if urls %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Short</th>
+                    <th scope="col">Long</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in urls %}
+                    <tr>
+                        <td><a href="{{ url_for('redirection', short_url=url.short) }}" target="_blank">{{ url.short }}</a></td>
+                        <td class="text-truncate" style="max-width: 400px;">{{ url.long }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p>You haven't shortened any URLs yet.</p>
+{% endif %}
 {% endblock %}

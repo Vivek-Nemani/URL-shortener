@@ -1,8 +1,18 @@
 {% extends "base.html" %}
-{% block title %}View all URLS{% endblock %}
+{% block title %}Your URLs{% endblock %}
 
 {% block content %}
-    {% for url in vals %}
-        <p><strong>Short:</strong>{{url.short}} <strong>Long:</strong> {{url.long}}</p>
-    {% endfor %}
+<h3>All URLs you have shortened</h3>
+{% if vals %}
+    <ul class="list-group">
+        {% for url in vals %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>Short:</strong> {{ url.short }}</span>
+                <span class="text-truncate" style="max-width: 400px;"><strong>Long:</strong> {{ url.long }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No URLs found.</p>
+{% endif %}
 {% endblock %}
